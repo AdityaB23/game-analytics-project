@@ -78,13 +78,12 @@ htmlcov/
 data/gameplay.csv
 
 ############################
-# Generated reports
+# Model artifacts
 ############################
 
-report/*.aux
-report/*.log
-report/*.out
-report/*.toc
+models/
+*.pkl
+*.joblib
 
 ############################
 # Temporary files
@@ -94,15 +93,16 @@ tmp/
 temp/
 
 ############################
-# Model artifacts (future-proof)
+# LaTeX build files
 ############################
 
-models/
-*.pkl
-*.joblib
+report/*.aux
+report/*.log
+report/*.out
+report/*.toc
 
 ############################
-# Keep important visual assets
+# Keep important assets
 ############################
 
 !plots/*.png
