@@ -11,7 +11,7 @@ Analytics case study demonstrating how gameplay telemetry can be used to detect 
 
 # Quick Start
 
-git clone https://github.com/yourusername/game-analytics-project.git  
+git clone https://github.com/AdityaB23/game-analytics-project.git  
 cd game-analytics-project  
 
 pip install -r requirements.txt  
