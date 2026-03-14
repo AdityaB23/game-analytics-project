@@ -1,51 +1,53 @@
+![Game Analytics Banner](plots/game_health_dashboard.png)
+
 # Game Analytics Case Study
-### Level Difficulty, Player Behavior & Game Economy Analysis
+### Difficulty, Player Behavior & Game Economy Analysis
 
 ![Python](https://img.shields.io/badge/Python-3.10-blue)
 ![Analytics](https://img.shields.io/badge/Domain-Game%20Analytics-purple)
 ![Status](https://img.shields.io/badge/Project-Portfolio-green)
 
-Analytics case study demonstrating how gameplay telemetry can be used to detect **difficulty spikes, player frustration, and churn risk** in level-based puzzle games.
+Analytics case study demonstrating how gameplay telemetry can be used to detect difficulty spikes, player frustration, and churn risk in level-based puzzle games.
 
-Inspired by analytics workflows used in live-operated puzzle games such as Candy Crush–style games.
+# Quick Start
 
+git clone https://github.com/yourusername/game-analytics-project.git  
+cd game-analytics-project  
+
+pip install -r requirements.txt  
+
+python src/telemetry_generator.py  
+
+streamlit run dashboard/app.py
 ---
 
 # Project Preview
 
-| Difficulty Curve | Player Retention | Game Health Dashboard |
+| Difficulty Curve | Player Retention | Level Health |
 |---|---|---|
-| ![Difficulty](plots/difficulty_curve.png) | ![Retention](plots/retention_curve.png) | ![Dashboard](plots/game_health_dashboard.png) |
-
----
-
-### Level Health Chart
-
-![Level Health](plots/level_health_chart.png)
-
-This chart combines **difficulty, retry behavior, and churn probability** to detect gameplay bottlenecks.
+| ![](plots/difficulty_curve.png) | ![](plots/retention_curve.png) | ![](plots/level_health_chart.png) |
 
 ---
 
 # Contents
 
-- [Hiring Manager TL;DR](#-hiring-manager-tldr)
-- [Project Motivation](#project-motivation)
-- [Executive Summary](#executive-summary)
-- [Game Health Dashboard](#game-health-dashboard)
-- [Interactive Analytics Dashboard](#interactive-analytics-dashboard)
-- [Project Overview](#project-overview)
-- [Gameplay Telemetry](#gameplay-telemetry)
-- [Analytics Workflow](#analytics-workflow)
-- [Visualizations](#visualizations)
-- [Game Designer Takeaways](#game-designer-takeaways)
-- [Case Study Reports](#case-study-reports)
-- [Difficulty Monitoring Script](#difficulty-monitoring-script)
-- [Repository Structure](#repository-structure)
+- Hiring Manager TL;DR
+- Project Motivation
+- Executive Summary
+- Game Health Dashboard
+- Interactive Dashboard
+- Project Overview
+- Dataset
+- Analytics Workflow
+- Visualizations
+- Game Designer Takeaways
+- Case Study Reports
+- Repository Structure
+- Setup
 
 ---
 
-# 🎮 Hiring Manager TL;DR
+# Hiring Manager TL;DR
 
 This project analyzes gameplay telemetry from a simulated puzzle game to detect **difficulty spikes and player churn risk**.
 
@@ -54,22 +56,19 @@ Using telemetry for **~3000 players across 120 levels**, the analysis identifies
 | Metric | Observation |
 |------|-------------|
 | Win Rate | ~42% |
-| Average Attempts | ~5.6 retries |
+| Average Attempts | ~5.6 |
 | Churn Probability | ~21% |
 
 These signals indicate **player frustration and progression drop-off**.
 
-Key capabilities demonstrated:
+The project demonstrates:
 
-- telemetry simulation (~200k gameplay events)
+- gameplay telemetry analytics
 - difficulty spike detection
-- player retention modeling
-- churn prediction
-- Monte Carlo progression simulation
-- A/B testing simulation
+- A/B experiment simulation
+- churn prediction modeling
 - game economy analysis
-- automated difficulty monitoring
-- interactive analytics dashboard
+- analytics dashboard
 
 ---
 
@@ -85,51 +84,47 @@ If levels are too difficult:
 
 - players become frustrated and churn.
 
-Game analytics teams use gameplay telemetry to monitor player experience and detect progression bottlenecks.
+Game analytics teams use telemetry to monitor **player experience and progression bottlenecks**.
 
-This project demonstrates how telemetry analytics can support **data-driven difficulty tuning and player retention optimization**.
+This project demonstrates how gameplay telemetry can support **data-driven difficulty tuning**.
 
 ---
 
 # Executive Summary
 
-Balancing difficulty is one of the most important challenges in live-operated puzzle games.
-
 Three gameplay signals are analyzed:
 
 | Metric | Meaning |
 |------|------|
-| Win Rate | Level difficulty |
-| Retry Rate | Player frustration |
-| Churn Probability | Player drop-off |
+| Win Rate | level difficulty |
+| Retry Rate | player frustration |
+| Churn Probability | player drop-off |
 
 The analysis identifies a **mid-game difficulty spike** where:
 
-- win rates decrease sharply
+- win rates decrease
 - retry attempts increase
-- player churn rises
+- churn rises
 
-Simulation experiments suggest that **booster rewards after repeated failures** can significantly improve player progression.
+Simulation experiments suggest **booster rewards after repeated failures** improve progression.
 
 ---
 
 # Game Health Dashboard
 
-This dashboard combines three gameplay signals:
+![](plots/game_health_dashboard.png)
 
-- **Win Rate → Difficulty**
-- **Retry Rate → Frustration**
-- **Churn Probability → Player Drop-Off**
+This dashboard combines:
 
-![Game Health Dashboard](plots/game_health_dashboard.png)
+- win rate
+- retry behavior
+- churn probability
 
-When all three metrics spike simultaneously, the level likely creates **player frustration and progression bottlenecks**.
+to detect **progression bottlenecks**.
 
 ---
 
-# Interactive Analytics Dashboard
-
-The project includes a **Streamlit dashboard** for exploring gameplay telemetry.
+# Interactive Dashboard
 
 Run locally:
 
@@ -137,12 +132,12 @@ Run locally:
 streamlit run dashboard/app.py
 ```
 
-The dashboard enables interactive exploration of:
+The dashboard allows interactive exploration of:
 
 - difficulty curves
 - retry behavior
 - player progression
-- difficulty spike alerts
+- difficulty alerts
 
 ---
 
@@ -152,127 +147,49 @@ This repository demonstrates a full analytics workflow for **live game operation
 
 Capabilities demonstrated:
 
-- gameplay telemetry analytics
-- difficulty spike detection
-- player retention modeling
+- telemetry analytics
+- player behavior modeling
+- experimentation analysis
 - churn prediction
-- experiment simulation
-- economy balance analysis
-- automated difficulty monitoring
+- economy balancing
 - analytics dashboards
 
 Dataset scale:
 
-```
-~3000 simulated players
-~120 levels
-~200k gameplay events
-```
+- ~3000 simulated players  
+- ~120 levels  
+- ~200k gameplay events  
 
 ---
 
-# Gameplay Telemetry
+# Dataset
 
-Each row represents a player attempting a level.
+Gameplay telemetry is generated using:
+
+```bash
+python src/telemetry_generator.py
+```
+
+Example schema:
 
 | Feature | Description |
 |------|-------------|
-| player_id | unique player identifier |
+| player_id | player identifier |
 | level | level number |
 | attempt | retry count |
 | win | level completion |
 | boosters_used | boosters used |
 
-Example:
-
-| player_id | level | attempt | win | boosters_used |
-|------|------|------|------|------|
-| 102 | 12 | 2 | 1 | 0 |
-| 102 | 13 | 4 | 0 | 1 |
-
 ---
 
 # Analytics Workflow
 
-## 1. Difficulty Analysis
-
-Win rate across levels reveals difficulty spikes.
-
-Puzzle games typically target:
-
-```
-70–80% win rate
-```
-
-Levels far below this range often cause **player frustration**.
-
----
-
-## 2. Retry Behavior
-
-Retry rate measures **player frustration**.
-
-High retries indicate:
-
-- confusing mechanics
-- excessive difficulty
-- lack of progression tools
-
----
-
-## 3. Player Progression Funnel
-
-Player retention is measured through **maximum level reached**.
-
-Large drops indicate **progression bottlenecks**.
-
----
-
-## 4. Difficulty Spike Detection
-
-Composite difficulty score:
-
-```
-difficulty_score = avg_attempts × (1 − win_rate)
-```
-
-Levels with high scores likely require **design adjustments**.
-
----
-
-## 5. Monte Carlo Progression Simulation
-
-Simulation estimates expected player progression under different difficulty conditions.
-
-Insight:
-
-> Difficulty spikes significantly reduce expected progression depth.
-
----
-
-## 6. Churn Prediction
-
-A Random Forest model predicts player churn using gameplay behavior.
-
-Key features:
-
-- win rate
-- retry attempts
-- booster usage
-
----
-
-## 7. Experiment Simulation
-
-A simulated A/B test evaluates a gameplay intervention.
-
-Treatment:
-
-```
-Free booster after repeated failures
-```
-
-Results show **improved player progression**.
+1. Generate gameplay telemetry  
+2. Analyze level difficulty  
+3. Identify difficulty spikes  
+4. Simulate gameplay experiments  
+5. Predict player churn  
+6. Analyze virtual economy  
 
 ---
 
@@ -280,19 +197,19 @@ Results show **improved player progression**.
 
 ### Difficulty Curve
 
-![Difficulty Curve](plots/difficulty_curve.png)
+![](plots/difficulty_curve.png)
 
-### Player Retention Funnel
+### Player Retention
 
-![Retention Curve](plots/retention_curve.png)
+![](plots/retention_curve.png)
 
-### Churn Probability
+### Level Health Chart
 
-![Churn Curve](plots/churn_probability.png)
+![](plots/level_health_chart.png)
 
-### Level Transition Heatmap
+### Transition Heatmap
 
-![Transition Heatmap](plots/transition_heatmap.png)
+![](plots/transition_heatmap.png)
 
 ---
 
@@ -302,16 +219,10 @@ Results show **improved player progression**.
 
 Telemetry shows a **difficulty spike around levels 45–55**.
 
-| Metric | Observation |
-|------|-------------|
-| Win Rate | drops below target range |
-| Retry Rate | increases |
-| Churn Probability | peaks afterward |
-
 Target:
 
 ```
-Restore win rate to ~70–80%
+70–80% win rate
 ```
 
 Possible changes:
@@ -329,46 +240,21 @@ Players experiencing repeated failures are more likely to churn.
 Possible interventions:
 
 - booster rewards after retries
-- temporary move bonuses
-- extra lives
-
----
-
-### Monitor Retry Rate
-
-Retry rate often increases **before churn**, making it an early warning signal.
+- extra moves
+- temporary bonuses
 
 ---
 
 # Case Study Reports
 
-Example gameplay analytics reports included in this repository:
-
-- `report/game_analytics_full_report.pdf`
-- `report/game_analytics_case_study_level50.pdf`
-
-These reports demonstrate how analytics insights can be communicated to **game designers and product teams**.
-
----
-
-# Difficulty Monitoring Script
-
-An automated monitoring tool flags problematic levels.
-
-Run:
+Included reports:
 
 ```
-python src/difficulty_monitor.py
+report/game_analytics_full_report.pdf
+report/game_analytics_case_study_level50.pdf
 ```
 
-Example output:
-
-```
-Level 50
-Win Rate: 0.42
-Avg Attempts: 5.6
-Churn Probability: 0.21
-```
+These demonstrate how analytics insights can be communicated to **game design teams**.
 
 ---
 
@@ -377,52 +263,51 @@ Churn Probability: 0.21
 ```
 game-analytics-project
 │
+├── README.md
+├── requirements.txt
+├── .gitignore
+│
 ├── data
-│   gameplay.csv
 │
 ├── notebooks
-│   level_difficulty_analysis.ipynb
-│   experiment_design_and_ab_testing.ipynb
-│   game_economy_analysis.ipynb
+│   01_level_difficulty_analysis.ipynb
+│   02_experiment_design_and_ab_testing.ipynb
+│   03_game_economy_analysis.ipynb
 │
 ├── src
 │   telemetry_generator.py
-│   churn_model.py
 │   difficulty_monitor.py
+│   churn_model.py
 │
 ├── dashboard
 │   app.py
 │
 ├── plots
-│   difficulty_curve.png
-│   retention_curve.png
-│   churn_probability.png
-│   transition_heatmap.png
-│   game_health_dashboard.png
-│   level_health_chart.png
 │
-├── report
-│   game_analytics_full_report.pdf
-│   game_analytics_case_study_level50.pdf
-│
-├── requirements.txt
-│
-└── README.md
+└── report
 ```
 
 ---
 
-# Tools
+# Setup
 
-Python libraries used:
+Install dependencies:
 
-- pandas
-- NumPy
-- matplotlib
-- seaborn
-- scikit-learn
-- SciPy
-- Streamlit
+```bash
+pip install -r requirements.txt
+```
+
+Generate telemetry dataset:
+
+```bash
+python src/telemetry_generator.py
+```
+
+Launch dashboard:
+
+```bash
+streamlit run dashboard/app.py
+```
 
 ---
 
@@ -431,7 +316,3 @@ Python libraries used:
 Aditya Bawane  
 
 Game Analytics Portfolio
-
-```
-github.com/yourusername/game-analytics-project
-```
